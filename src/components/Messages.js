@@ -1,13 +1,9 @@
 import React from 'react'
 
-export default function Messages() {
+export default function Messages(props) {
     return (
         <div>
-            <p>
-            Message
-            Message
-            Message
-            </p>
+            {props.messages.map(message=> <p>{message}</p>)}
         </div>
     )
 }
