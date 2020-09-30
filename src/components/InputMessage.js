@@ -31,8 +31,9 @@ export default function InputMessage(props) {
                 
                 {/* Send Button */}
                 <button
-                type={submit}
-                onClick={sendMessage}>Send</button>
+                    disabled={!input}
+                    type={submit}
+                    onClick={sendMessage}>Send</button>
             </form>
         </div>
     )
