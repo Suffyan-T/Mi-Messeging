@@ -8,10 +8,13 @@ import InputMessage from './components/InputMessage'
 
 function App() {
 
-
   // State
   const [messages, setMessages] = useState([])
+  const [username, setUsername] = useState('')
 
+  useEffect(() => {
+      setUsername(prompt('Enter a user name'))
+  }, [])
 
 
   return (

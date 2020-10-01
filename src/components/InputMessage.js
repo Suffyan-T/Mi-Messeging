@@ -4,9 +4,7 @@ import React, {useState, useRef, useEffect} from 'react'
 
 export default function InputMessage(props) {
 
-    useEffect(() => myInput.current && myInput.current.focus(), [])
-
-    
+    useEffect(()=>getFocus(), [])
 
     // State
     const [input, setInput]= useState('')
@@ -17,6 +15,8 @@ export default function InputMessage(props) {
         props.setMessages([...props.messages, input])
         setInput('')
     }
+
+    const getFocus=()=>document.getElementById("myTextField").focus()
     
 
     return (
@@ -24,6 +24,8 @@ export default function InputMessage(props) {
             {/* Message Input */}
             <form>
                 <input 
+                    id="myTextField"
+                    // inputRef={input => input && input.focus()}
                     // Sets value of input to input variable
                     value= {input}
                     // 
@@ -32,7 +34,7 @@ export default function InputMessage(props) {
                 {/* Send Button */}
                 <button
                     disabled={!input}
-                    type={submit}
+                    type={'submit'}
                     onClick={sendMessage}>Send</button>
             </form>
         </div>
