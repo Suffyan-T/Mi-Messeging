@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 
+// Component Import
+import Header from './components/Header'
+import Messages from './components/Messages'
+import InputMessage from './components/InputMessage'
+
 function App() {
+
+  // State
+  const [messages, setMessages] = useState([])
+  const [username, setUsername] = useState('')
+
+  useEffect(() => {
+      setUsername(prompt('Enter a user name'))
+  }, [])
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Messages messages={messages}/>
+      <InputMessage messages={messages} setMessages={setMessages}/>
     </div>
   );
 }
