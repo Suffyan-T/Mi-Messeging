@@ -13,7 +13,7 @@ export default function InputMessage(props) {
     // Send messages
     const sendMessage=e=>{
         e.preventDefault()
-        props.setMessages([...props.messages, input])
+        props.setMessages([...props.messages, {message: input ,username: props.username}])
         setInput('')
     }
 
