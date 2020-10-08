@@ -5,18 +5,28 @@ import './App.css';
 import Header from './components/Header'
 import Messages from './components/Messages'
 import InputMessage from './components/InputMessage'
+import db from './firebase';
 
 
 function App() {
 
   // State
-  const [messages, setMessages] = useState([{message: 'hi this is tom', username: 'Tom Sullivan'}])
+  const [messages, setMessages] = useState([])
   const [username, setUsername] = useState('')
-
+  console.log(messages)
   // React Hooks
-  useEffect(() => {
-      setUsername(prompt('Enter a user name'))
-  }, [])
+
+    // Prompts user to enter Username
+    useEffect(() => {
+        setUsername(prompt('Enter a user name'))
+    }, [])
+
+    // Pulls data from firestore 
+    useEffect(() => {
+      db.collection('messages').onSnapshot(snap=>{
+        setMessages(snap.docs.map(doc=>doc.data()))
+      })
+    }, [])
 
 
   return (
