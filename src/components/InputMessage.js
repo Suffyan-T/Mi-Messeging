@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
-
-
+import db from '../firebase';
+import firebase from 'firebase'
 
 export default function InputMessage(props) {
 
@@ -13,7 +13,11 @@ export default function InputMessage(props) {
     // Send messages
     const sendMessage=e=>{
         e.preventDefault()
-        props.setMessages([...props.messages, {message: input ,username: props.username}])
+        db.collection('messages').add({
+            username: props.username,
+            message: input,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+          })
         setInput('')
     }
 
