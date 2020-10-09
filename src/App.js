@@ -8,26 +8,29 @@ import InputMessage from './components/InputMessage'
 import db from './firebase';
 
 
-function App() {
+export default function App() {
 
   // State
   const [messages, setMessages] = useState([])
   const [username, setUsername] = useState('')
-  console.log(messages)
+  
   // React Hooks
-
-    // Prompts user to enter Username
-    useEffect(() => {
-        setUsername(prompt('Enter a user name'))
-    }, [])
 
     // Pulls data from firestore 
     useEffect(() => {
-      db.collection('messages').onSnapshot(snap=>{
-        setMessages(snap.docs.map(doc=>doc.data()))
-      })
+      db.collection('messages').onSnapshot(snap=>setMessages(snap.docs.map(doc=>doc.data())))
     }, [])
 
+     // Prompts user to enter Username
+    //  useEffect(() => {
+    //   setUsername(prompt('Enter a user name'))
+    // }, [])
+    db.collection("messages").get().then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+          // doc.data() is never undefined for query doc snapshots
+          console.log(doc.id, " => ", doc.data());
+      });
+  });
 
   return (
     <div className="App">
@@ -38,4 +41,3 @@ function App() {
   );
 }
 
-export default App;
