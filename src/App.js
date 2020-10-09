@@ -18,7 +18,7 @@ export default function App() {
 
     // Pulls data from firestore 
     useEffect(() => {
-      db.collection('messages').onSnapshot(snap=>setMessages(snap.docs.map(doc=>doc.data())))
+      db.collection('messages').orderBy('timestamp').onSnapshot(snap=>setMessages(snap.docs.map(doc=>doc.data())))
     }, [])
 
      // Prompts user to enter Username
